@@ -10,6 +10,7 @@ type Person {
 
   type Query {
     person: Person
+    people: [Person]
   }
 
   type Schema {
@@ -22,12 +23,17 @@ const resolvers = {
     id: 1007,
     name: 'Will',
     enabled: true
-  })
+  }),
+  people: () => [
+    { id: 1007, name: 'Will', enabled: true },
+    { id: 1008, name: 'Joe', enabled: false },
+    { id: 1009, name: 'Julie', enabled: true }
+  ]
 };
 
 const query = `
   query myQuery {
-    person {
+    people {
       id
       name
       enabled
@@ -35,4 +41,4 @@ const query = `
   }
 `;
 
-graphql(schema, query, resolvers).then(x => console.log(x));
+graphql(schema, query, resolvers).then(x => console.log(x.data));
