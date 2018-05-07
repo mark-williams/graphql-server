@@ -2,10 +2,14 @@ const { graphql, buildSchema } = require('graphql');
 
 /* eslint-disable no-console */
 const schema = buildSchema(`
+type Person {
+  id: ID,
+  name: String,
+  enabled: Boolean
+  }
+
   type Query {
-    id: ID,
-    name: String,
-    enabled: Boolean
+    person: Person
   }
 
   type Schema {
@@ -14,16 +18,20 @@ const schema = buildSchema(`
 `);
 
 const resolvers = {
-  id: () => 1007,
-  name: () => 'Will',
-  enabled: () => true
+  person: () => ({
+    id: 1007,
+    name: 'Will',
+    enabled: true
+  })
 };
 
 const query = `
   query myQuery {
-    id
-    name
-    enabled
+    person {
+      id
+      name
+      enabled
+    }
   }
 `;
 
