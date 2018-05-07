@@ -1,6 +1,11 @@
 const { graphql, buildSchema } = require('graphql');
+const express = require('express');
+const graphqlHTTP = require('express-graphql');
 
 /* eslint-disable no-console */
+const PORT = process.env.port || 3000;
+const server = express();
+
 const schema = buildSchema(`
 type Person {
   id: ID,
@@ -31,14 +36,15 @@ const resolvers = {
   ]
 };
 
-const query = `
-  query myQuery {
-    people {
-      id
-      name
-      enabled
-    }
-  }
-`;
+server.use(
+  '/graphql',
+  graphqlHTTP({
+    schema,
+    graphiql: true,
+    rootValue: resolvers
+  })
+);
 
-graphql(schema, query, resolvers).then(x => console.log(x.data));
+server.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
+});
