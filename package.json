@@ -4,5 +4,17 @@
   "description": "Simple GraphQL server",
   "main": "index.js",
   "author": "Mark Williams",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "graphql": "^0.13.2"
+  },
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-es5": "^1.2.0",
+    "eslint-plugin-react": "^7.7.0"
+  }
 }
