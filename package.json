@@ -1,0 +1,8 @@
+{
+  "name": "graphql-server",
+  "version": "1.0.0",
+  "description": "Simple GraphQL server",
+  "main": "index.js",
+  "author": "Mark Williams",
+  "license": "MIT"
+}

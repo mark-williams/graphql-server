@@ -1,0 +1,14 @@
+{
+  "extends": "eslint-config-airbnb-es5",
+
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+  "globals": { "Promise": true },
+  "rules": {
+    "new-cap": "off",
+    "indent": ["error", 2, { "SwitchCase": 1 }]
+  }
+}
