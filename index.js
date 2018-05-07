@@ -3,7 +3,9 @@ const { graphql, buildSchema } = require('graphql');
 /* eslint-disable no-console */
 const schema = buildSchema(`
   type Query {
-    foo: String
+    id: ID,
+    name: String,
+    enabled: Boolean
   }
 
   type Schema {
@@ -12,12 +14,16 @@ const schema = buildSchema(`
 `);
 
 const resolvers = {
-  foo: () => 'bar'
+  id: () => 1007,
+  name: () => 'Will',
+  enabled: () => true
 };
 
 const query = `
   query myQuery {
-    foo
+    id
+    name
+    enabled
   }
 `;
 
