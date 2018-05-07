@@ -8,6 +8,7 @@ const {
 } = require('graphql');
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
+const { getPersonById, getAll } = require('./src/personData');
 
 /* eslint-disable no-console */
 const PORT = process.env.port || 3000;
@@ -34,22 +35,15 @@ const queryType = new GraphQLObjectType({
   fields: {
     person: {
       type: personType,
-      resolve: () =>
-        Promise.resolve({
-          id: 1007,
-          name: 'Will',
-          enabled: true
-        })
+      args: {
+        id: { type: GraphQLID, description: 'id of person' }
+      },
+      resolve: (_, args) => Promise.resolve(getPersonById(args.id))
     },
     people: {
       type: peopleType,
       description: 'List of people',
-      resolve: () =>
-        Promise.resolve([
-          { id: 1007, name: 'Will', enabled: true },
-          { id: 1008, name: 'Joe', enabled: false },
-          { id: 1009, name: 'Julie', enabled: true }
-        ])
+      resolve: () => Promise.resolve(getAll())
     }
   }
 });
