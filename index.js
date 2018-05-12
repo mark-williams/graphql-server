@@ -2,6 +2,7 @@ const {
   GraphQLSchema,
   GraphQLObjectType,
   GraphQLList,
+  GraphQLNonNull,
   GraphQLID,
   GraphQLString,
   GraphQLBoolean
@@ -36,7 +37,7 @@ const queryType = new GraphQLObjectType({
     person: {
       type: personType,
       args: {
-        id: { type: GraphQLID, description: 'id of person' }
+        id: { type: GraphQLNonNull(GraphQLID), description: 'Id of person' }
       },
       resolve: (_, args) => Promise.resolve(getPersonById(args.id))
     },
