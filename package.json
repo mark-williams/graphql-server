@@ -11,7 +11,8 @@
     "graphql": "^0.13.2"
   },
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "start": "node index"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
