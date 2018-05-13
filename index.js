@@ -9,7 +9,7 @@ const {
 } = require('graphql');
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
-const { getPersonById, getAll } = require('./src/personData');
+const { getPersonById, getAll, createPerson } = require('./src/personData');
 
 /* eslint-disable no-console */
 const PORT = process.env.port || 3000;
@@ -49,8 +49,32 @@ const queryType = new GraphQLObjectType({
   }
 });
 
+const mutationType = new GraphQLObjectType({
+  name: 'mutation',
+  description: 'root mutation',
+  fields: {
+    createPerson: {
+      type: personType,
+      args: {
+        name: {
+          type: GraphQLNonNull(GraphQLString),
+          description: "Person's name"
+        },
+        enabled: {
+          type: GraphQLNonNull(GraphQLBoolean),
+          description: 'Denotes if person still active on system'
+        }
+      },
+      resolve: (_, args) => {
+        return createPerson(args);
+      }
+    }
+  }
+});
+
 const schema = new GraphQLSchema({
-  query: queryType
+  query: queryType,
+  mutation: mutationType
 });
 
 server.use(

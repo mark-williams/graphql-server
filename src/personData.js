@@ -1,7 +1,7 @@
 const personData = [
-  { id: 'A1007', name: 'Will', enabled: true },
-  { id: 'A1008', name: 'Joe', enabled: false },
-  { id: 'A1009', name: 'Julie', enabled: true }
+  { id: 'A1000', name: 'Will', enabled: true },
+  { id: 'A1001', name: 'Joe', enabled: false },
+  { id: 'A1002', name: 'Julie', enabled: true }
 ];
 
 const getPersonById = id => {
@@ -13,7 +13,21 @@ const getAll = () => {
   return personData;
 };
 
+const getId = () => `A${1000 + personData.length}`;
+
+const createPerson = ({ name, enabled }) => {
+  const person = {
+    id: getId(),
+    name,
+    enabled
+  };
+
+  personData.push(person);
+  return person;
+};
+
 module.exports = {
   getPersonById,
-  getAll
+  getAll,
+  createPerson
 };
